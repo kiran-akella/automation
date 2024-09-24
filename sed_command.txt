@@ -1,0 +1,49 @@
+sed stands for Stream editor, basically it edits the Stream of data.
+
+Syntax:
+sed [options] 'commands' fileName
+commandOutput | sed [options] 'commands'
+
+sed '' fileName ==== display File Content
+sed -n '' fileName ==== stop Default Display
+
+default nature of sed command is to print the entire file.
+➜  /tmp sed '' demodata.txt 
+root:x:0:0:root:/root:/usr/bin/zsh
+
+to eliminate default nature use -n option 
+➜  /tmp sed -n '' demodata.txt
+➜  /tmp 
+-------------------------------------------------
+
+sed -n '2p' fileName ==== print 2 nd line
+
+➜  /tmp sed -n '2p' passwd_num
+     2  bin:x:1:1:bin:/bin:/sbin/nologin
+===========================
+sed -n '3,5p' fileName ==== print 3rd to 5th lines
+➜  /tmp sed -n '3,5p' passwd_num
+     3  daemon:x:2:2:daemon:/sbin:/sbin/nologin
+     4  adm:x:3:4:adm:/var/adm:/sbin/nologin
+     5  lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+===========================
+sed -n '4,$p' fileName ==== print 4 th to last line
+===========================
+sed -n '$p' fileName ==== print last line
+➜  /tmp ls -lrt | sed -n '$p' 
+-rw-r--r--. 1 root    root       1546 Sep 18 06:43 passwd_num
+===========================
+sed -n '$!p' filename ==== print except last line
+===========================
+sed -n '1,+3p' fileName ==== print 1 st and 3 lines after that
+===========================
+sed -n '1~3p' fileName ==== print 1 st and every 3 rd line after that
+===========================
+To search a string using sed command.
+
+sed -n '/root/p' /etc/passwd
+
+➜  /tmp sed -n '/root/p' /etc/passwd
+root:x:0:0:root:/root:/usr/bin/zsh
+operator:x:11:0:operator:/root:/sbin/nologin
+===========================

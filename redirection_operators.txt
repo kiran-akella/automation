@@ -1,0 +1,85 @@
+echo $? - command used to check whether the previous command executed successfully or not.
+it returns 0 if the prior is success, returns non-zero if prior is failure.
+Ex: 
+➜  scripts cat ram                                       
+cat: ram: No such file or directory
+➜  scripts echo $?      
+1
+---------------------------------------------------------------------------------------------
+redirection_operators
+----------------------
+Input redirection operators(< or <<<)
+
+output redirection operators(> or >>)
+
+Combination redirection operators (|)
+
+cut -d ':' -f1 <<< $(cat /etc/passwd | grep root)
+cut -d ':' -f1 <<< $(cat /etc/passwd | grep root | head -1)
+
+<<< always expects the value passed to be as a string.
+---------------------------------------------------------------------------------------------
+> is used to redirect data into a file by erasing existing ones.
+>> will append the data.
+---------------------------------------------------------------------------------------------
+| pipe 
+
+➜  /tmp ps -ef| grep jenkins | awk 'NR==1'
+jenkins      735       1  0 12:47 ?        00:00:27 /usr/bin/java -Djava.awt.headless=true -jar /usr/share/java/jenkins.war --webroot=/var/cache/jenkins/war --httpPort=8080
+
+➜  /tmp cut -d '?' -f1 <<< $(ps -ef| grep jenkins | awk 'NR==1')
+jenkins      735       1  0 12:47 
+
+➜  /tmp java -version 2>&1 | awk 'NR==1'
+openjdk version "21.0.4" 2024-07-16 LTS
+---------------------------------------------------------------------------------------------
+
+File descriptors for STDIN, STDOUT and STDERR
+
+0:STDIN (0<)
+1:STDOUT (> or 1>) 1 is referred as success output.
+2:STDERR (2>) 2 is referred as failure.
+
+Ex: Here shiva is not existing, but passwd exist in tmp.
+➜  /tmp ls -lrt shiva passwd 
+ls: cannot access 'shiva': No such file or directory
+-r--------. 1 root root 1357 Sep 17 13:17 passwd
+
+➜  /tmp ls -lrt shiva passwd 1>success.log 2>failure.log
+
+➜  /tmp cat success.log
+-r--------. 1 root root 1357 Sep 17 13:17 passwd
+
+➜  /tmp cat failure.log 
+ls: cannot access 'shiva': No such file or directory
+============
+To store both success and failure log
+below both will work similarly
+➜  /tmp ls -lrt shiva passwd 1>>so.log 2>so.log
+➜  /tmp ls -lrt shiva passwd 1>soo.log 2>&1
+
+Ex: 
+
+➜  /tmp /tmp ls -lrt shiva passwd 1>soo.log 2>&1
+➜  /tmp ls -lrt shiva passwd 1>soo.log 2>&1
+
+➜  /tmp cat so.log
+ls: cannot access 'shiva': No such file or directory
+-r--------. 1 root root 1357 Sep 17 13:17 passwd
+
+➜  /tmp cat soo.log
+ls: cannot access 'shiva': No such file or directory
+-r--------. 1 root root 1357 Sep 17 13:17 passwd
+
+=========================
+
+To redirect success or failure to somewhere, we dont want to keep anywhere. we can use /dev/null
+Ex: 
+➜  /tmp ls shiva passwd 2>/dev/null        
+passwd
+
+➜  /tmp ls shiva passwd 1>/dev/null
+ls: cannot access 'shiva': No such file or directory
+
+---------------------------------------------------------------------------------------------
+
