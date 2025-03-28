@@ -37,12 +37,19 @@ DevOps is a collaborative approach that unifies development (Dev) and operations
 The DevOps process follows a continuous cycle of development, integration, testing, deployment, and monitoring.
 
 1️⃣ **Plan** 📋 – Define requirements and roadmap.
+
 2️⃣ **Develop** 💻 – Write and version control code.
+
 3️⃣ **Build** 🔨 – Compile and package the application.
+
 4️⃣ **Test** 🧪 – Automate testing for quality assurance.
+
 5️⃣ **Release** 📦 – Prepare for deployment.
+
 6️⃣ **Deploy** 🚀 – Release to production environments.
+
 7️⃣ **Operate** ⚙️ – Maintain performance, availability, and security.
+
 8️⃣ **Monitor** 📈 – Continuously track system health and user feedback.
 
 ---
