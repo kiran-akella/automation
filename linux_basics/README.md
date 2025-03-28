@@ -1,7 +1,7 @@
 # Linux Overview 🐧
 
 ## 🔍 **Introduction**
-Linux is an open-source, Unix-like operating system that powers everything from personal computers to servers, embedded systems, and supercomputers. It is known for its stability, security, and flexibility.
+Linux is an open-source, Unix-like operating system that powers everything from personal computers to servers, embedded systems, and supercomputers. It is known for its stability, security, and flexibility. 
 
 ---
 
